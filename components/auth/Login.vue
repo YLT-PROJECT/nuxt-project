@@ -1,6 +1,12 @@
 <template>
     <div class="box login-box">
         <h2 class="is-size-2">Accede al sistema</h2>
+        <div
+            v-if="status > 0"
+            :class="`notification ${status < 400 ? 'is-primary' : 'is-danger'}`"
+        >
+            {{ message }}
+        </div>
         <form @submit.prevent="login">
             <div class="field">
                 <div class="control has-icons-left has-icons-right">
@@ -40,29 +46,34 @@
 </template>
 <script lang="ts">
 import Vue from 'vue'
-declare module 'vue/types/vue' {
-    interface Vue {
-        $myInjectedFunction(message: string): void
-    }
-}
-
-// import { mapMutations } from 'vuex'
+import instanceAxios from '~/plugins/axios.ts'
 export default Vue.extend({
     data() {
         return {
             data: {
                 email: '',
                 password: ''
-            }
+            },
+            status: -1,
+            message: ''
         }
     },
     methods: {
         // ...mapMutations(['session']),
-        login() {
-            const { email, password } = this.data
-            // console.log(this.$myInjectedFunction2('sdsdds'))
-            console.log(this.$axioss)
-            this
+        async login() {
+            try {
+                const { email, password } = this.data
+                const req = await instanceAxios.post('/auth/login', {
+                    email,
+                    password
+                })
+                this.status = req.status
+                this.message = 'Accediste correctamente'
+            } catch (error) {
+                console.dir(error)
+                this.status = error.response.status
+                this.message = error.response.data.message
+            }
 
             // const req = await this.$api.login(email, password)
             // this.session({
