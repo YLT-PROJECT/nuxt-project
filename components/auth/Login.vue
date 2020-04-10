@@ -41,8 +41,10 @@
 </template>
 <script lang="ts">
 import Vue from 'vue'
+import { mapState, mapMutations } from 'vuex'
 import instanceAxios from '~/plugins/axios.ts'
 import Result from '~/components/ui/Result.vue'
+
 export default Vue.extend({
     components: { Result },
     data() {
@@ -55,8 +57,11 @@ export default Vue.extend({
             message: ''
         }
     },
+    computed: {
+        ...mapState('auth', ['token'])
+    },
     methods: {
-        // ...mapMutations(['session']),
+        ...mapMutations('auth', ['commitSession']),
         async login() {
             try {
                 const { email, password } = this.data
@@ -66,6 +71,7 @@ export default Vue.extend({
                 })
                 this.status = req.status
                 this.message = 'Accediste correctamente'
+                this.commitSession(req.data)
             } catch (error) {
                 this.status = error.response.status
                 this.message = error.response.data.message
