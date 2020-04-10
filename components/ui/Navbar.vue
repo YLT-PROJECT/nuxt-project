@@ -23,12 +23,19 @@
             </a>
         </div>
 
-        <div :class="classesNavbarMenu">
+        <div :class="classesNavbarMenu" @click="isActive = false">
             <div class="navbar-end">
                 <div class="navbar-item">
-                    <div class="buttons">
-                        <span class="button is-primary">Login</span>
-                    </div>
+                    <template v-if="token && token.length > 0">
+                        <button class="button" @click="() => trashSession()">
+                            Cerrar la sesion
+                        </button>
+                    </template>
+                    <template v-else>
+                        <div class="buttons">
+                            <span class="button is-primary">Login</span>
+                        </div>
+                    </template>
                 </div>
             </div>
         </div>
@@ -37,6 +44,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { mapState, mapMutations } from 'vuex'
 export default Vue.extend({
     data() {
         return {
@@ -44,6 +52,7 @@ export default Vue.extend({
         }
     },
     computed: {
+        ...mapState('auth', ['token']),
         classesNavbarMenu(): any {
             return {
                 'navbar-menu': true,
@@ -57,6 +66,9 @@ export default Vue.extend({
                 'is-active': this.isActive
             }
         }
+    },
+    methods: {
+        ...mapMutations('auth', ['trashSession'])
     }
 })
 </script>

@@ -3,6 +3,7 @@
         <authed-view>
             <template slot="authed">
                 <p>Enhorabuena, ahora seras redireccionado</p>
+                <redirect-to to="/files/root" />
             </template>
             <template slot="unauthed">
                 <h2 class="is-size-2">Accede al sistema</h2>
@@ -56,9 +57,10 @@ import { mapState, mapMutations } from 'vuex'
 import instanceAxios from '~/plugins/axios.ts'
 import Result from '~/components/ui/Result.vue'
 import AuthedView from '~/components/ui/AuthedView.vue'
+import RedirectTo from '~/components/ui/RedirectTo.vue'
 
 export default Vue.extend({
-    components: { Result, AuthedView },
+    components: { Result, AuthedView, RedirectTo },
     data() {
         return {
             data: {
