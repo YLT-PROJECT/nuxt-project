@@ -1,7 +1,9 @@
 <template>
     <div>
         <nav-bar />
-        <nuxt />
+        <main>
+            <nuxt />
+        </main>
     </div>
 </template>
 <script lang="ts">
@@ -11,3 +13,8 @@ export default Vue.extend({
     components: { NavBar }
 })
 </script>
+<style scoped>
+main {
+    margin-top: 10px;
+}
+</style>

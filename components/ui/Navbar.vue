@@ -1,8 +1,12 @@
 <template>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+    <nav
+        class="navbar is-dark app-nav"
+        role="navigation"
+        aria-label="main navigation"
+    >
         <div class="navbar-brand app-menu">
             <span class="navbar-item">
-                <h1 class="is-size-1">YLT</h1>
+                <h1 class="is-size-5">YLT</h1>
             </span>
 
             <a
