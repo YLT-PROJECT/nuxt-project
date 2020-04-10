@@ -36,7 +36,7 @@ export default {
     /*
      ** Plugins to load before mounting the App
      */
-    plugins: [],
+    plugins: [{ src: '~/plugins/persist.ts', ssr: false }],
     /*
      ** Nuxt.js dev-modules
      */
