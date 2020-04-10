@@ -67,17 +67,9 @@ export default Vue.extend({
                 this.status = req.status
                 this.message = 'Accediste correctamente'
             } catch (error) {
-                console.dir(error)
                 this.status = error.response.status
                 this.message = error.response.data.message
             }
-
-            // const req = await this.$api.login(email, password)
-            // this.session({
-            //     token: req.jwt,
-            //     user: req.user
-            // })
-            // this.$emit('close')
         }
     }
 })

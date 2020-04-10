@@ -1,7 +1,9 @@
 <template>
-    <div class="box login-box">
+    <div class="box register-box">
         <h2 class="is-size-2">Accede al sistema</h2>
-        <form @submit.prevent="login">
+        <result v-if="status > 0" :positive="status < 400" :message="message" />
+
+        <form @submit.prevent="register">
             <div class="field">
                 <div class="control">
                     <input
@@ -60,8 +62,11 @@
 </template>
 <script lang="ts">
 import Vue from 'vue'
-// import { mapMutations } from 'vuex'
+import instanceAxios from '~/plugins/axios.ts'
+import Result from '~/components/ui/Result.vue'
+
 export default Vue.extend({
+    components: { Result },
     data() {
         return {
             data: {
@@ -69,27 +74,34 @@ export default Vue.extend({
                 password: '',
                 name: '',
                 surname: ''
-            }
+            },
+            status: -1,
+            message: ''
         }
     },
     methods: {
         // ...mapMutations(['session']),
-        login() {
-            const { name, surname, email, password } = this.data
-            console.log(name, surname, email, password)
-
-            // const req = await this.$api.login(email, password)
-            // this.session({
-            //     token: req.jwt,
-            //     user: req.user
-            // })
-            // this.$emit('close')
+        async register() {
+            try {
+                const { email, password, name, surname } = this.data
+                const req = await instanceAxios.post('/auth/register', {
+                    email,
+                    password,
+                    name,
+                    surname
+                })
+                this.status = req.status
+                this.message = 'Te registraste correctamente'
+            } catch (error) {
+                this.status = error.response.status
+                this.message = error.response.data.message
+            }
         }
     }
 })
 </script>
 <style scoped>
-.login-box {
+.register-box {
     margin: 0 10px;
 }
 </style>
