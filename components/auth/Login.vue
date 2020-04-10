@@ -1,12 +1,7 @@
 <template>
     <div class="box login-box">
         <h2 class="is-size-2">Accede al sistema</h2>
-        <div
-            v-if="status > 0"
-            :class="`notification ${status < 400 ? 'is-primary' : 'is-danger'}`"
-        >
-            {{ message }}
-        </div>
+        <result v-if="status > 0" :positive="status < 400" :message="message" />
         <form @submit.prevent="login">
             <div class="field">
                 <div class="control has-icons-left has-icons-right">
@@ -47,7 +42,9 @@
 <script lang="ts">
 import Vue from 'vue'
 import instanceAxios from '~/plugins/axios.ts'
+import Result from '~/components/ui/Result.vue'
 export default Vue.extend({
+    components: { Result },
     data() {
         return {
             data: {
