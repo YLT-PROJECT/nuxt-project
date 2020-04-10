@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "~/": ["./"],
+      "~/*": ["./*"],
+      "@/*": ["./*"],
+      "~~/*": ["./*"],
+      "@@/*": ["./*"]
+    },
+    "strict": true,
+  },
+  "files": [
+      "./types.d.ts"
+  ],
+  "exclude": ["node_modules", ".nuxt", "dist"]
+}

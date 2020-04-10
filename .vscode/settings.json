@@ -1,0 +1,9 @@
+{
+    "path-autocomplete.pathMappings": {
+        "~": "${folder}/nuxt-ylt"
+    },
+    "eslint.validate": ["vue", "html", "javascript"],
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    }
+}
