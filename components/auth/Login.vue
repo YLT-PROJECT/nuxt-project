@@ -1,42 +1,53 @@
 <template>
     <div class="box login-box">
-        <h2 class="is-size-2">Accede al sistema</h2>
-        <result v-if="status > 0" :positive="status < 400" :message="message" />
-        <form @submit.prevent="login">
-            <div class="field">
-                <div class="control has-icons-left has-icons-right">
-                    <input
-                        v-model="data.email"
-                        class="input"
-                        type="email"
-                        placeholder="email"
-                    />
-                    <span class="icon is-small is-left"
-                        ><i class="fas fa-envelope"></i
-                    ></span>
-                </div>
-            </div>
-            <div class="field">
-                <div class="control has-icons-left">
-                    <input
-                        v-model="data.password"
-                        class="input"
-                        type="password"
-                        placeholder="password"
-                    />
-                    <span class="icon is-small is-left"
-                        ><i class="fas fa-lock"></i
-                    ></span>
-                </div>
-            </div>
-            <div class="field">
-                <div class="control">
-                    <button class="button is-success" type="submit">
-                        Login
-                    </button>
-                </div>
-            </div>
-        </form>
+        <authed-view>
+            <template slot="authed">
+                <p>Enhorabuena, ahora seras redireccionado</p>
+            </template>
+            <template slot="unauthed">
+                <h2 class="is-size-2">Accede al sistema</h2>
+                <result
+                    v-if="status > 0"
+                    :positive="status < 400"
+                    :message="message"
+                />
+                <form @submit.prevent="login">
+                    <div class="field">
+                        <div class="control has-icons-left has-icons-right">
+                            <input
+                                v-model="data.email"
+                                class="input"
+                                type="email"
+                                placeholder="email"
+                            />
+                            <span class="icon is-small is-left"
+                                ><i class="fas fa-envelope"></i
+                            ></span>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control has-icons-left">
+                            <input
+                                v-model="data.password"
+                                class="input"
+                                type="password"
+                                placeholder="password"
+                            />
+                            <span class="icon is-small is-left"
+                                ><i class="fas fa-lock"></i
+                            ></span>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <button class="button is-success" type="submit">
+                                Login
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </template>
+        </authed-view>
     </div>
 </template>
 <script lang="ts">
@@ -44,9 +55,10 @@ import Vue from 'vue'
 import { mapState, mapMutations } from 'vuex'
 import instanceAxios from '~/plugins/axios.ts'
 import Result from '~/components/ui/Result.vue'
+import AuthedView from '~/components/ui/AuthedView.vue'
 
 export default Vue.extend({
-    components: { Result },
+    components: { Result, AuthedView },
     data() {
         return {
             data: {
