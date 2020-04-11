@@ -80,7 +80,7 @@ export default Vue.extend({
             try {
                 const { email, password } = this.data
                 const req = await instanceAxios.post('/auth/login', {
-                    email,
+                    username: email,
                     password
                 })
                 this.status = req.status
