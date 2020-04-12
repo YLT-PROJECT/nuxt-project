@@ -54,7 +54,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { mapState, mapMutations } from 'vuex'
-import instanceAxios from '~/plugins/axios.ts'
+import { setToken } from '../../plugins/axios'
+import instanceAxios, { setToken } from '~/plugins/axios.ts'
 import Result from '~/components/ui/Result.vue'
 import AuthedView from '~/components/ui/AuthedView.vue'
 import RedirectTo from '~/components/ui/RedirectTo.vue'
@@ -83,6 +84,7 @@ export default Vue.extend({
                     username: email,
                     password
                 })
+                setToken(req.data.token)
                 this.status = req.status
                 this.message = 'Accediste correctamente'
                 this.commitSession(req.data)
