@@ -54,7 +54,6 @@
 <script lang="ts">
 import Vue from 'vue'
 import { mapState, mapMutations } from 'vuex'
-import { setToken } from '../../plugins/axios'
 import instanceAxios, { setToken } from '~/plugins/axios.ts'
 import Result from '~/components/ui/Result.vue'
 import AuthedView from '~/components/ui/AuthedView.vue'

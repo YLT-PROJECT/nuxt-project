@@ -1,9 +1,11 @@
 import Vuex from 'vuex'
 import * as AuthModule from './auth'
+import * as NodeModule from './nodes'
 
 const config = {
     modules: {
-        auth: AuthModule
+        auth: AuthModule,
+        nodes: NodeModule
     }
 }
 

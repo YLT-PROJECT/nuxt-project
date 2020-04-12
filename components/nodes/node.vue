@@ -13,9 +13,14 @@
         <footer class="card-footer">
             <div class="card-footer-item">
                 <div class="buttons">
-                    <button class="button is-primary">
+                    <nuxt-link
+                        :to="
+                            `/files/${$route.params.id}/editor?nodeId=${node._id}`
+                        "
+                        class="button is-primary"
+                    >
                         Editar
-                    </button>
+                    </nuxt-link>
                 </div>
             </div>
         </footer>

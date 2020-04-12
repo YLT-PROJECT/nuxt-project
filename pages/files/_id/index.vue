@@ -3,9 +3,11 @@
         <div v-if="node" class="toolbar">
             <h2 class="is-size-4">{{ node.title }}</h2>
             <div class="buttons">
-                <div class="icon is-medium ">
-                    <i class="fas fa-lg fa-plus"></i>
-                </div>
+                <nuxt-link :to="`/files/${$route.params.id}/editor`">
+                    <div class="icon is-medium ">
+                        <i class="fas fa-lg fa-plus"></i>
+                    </div>
+                </nuxt-link>
             </div>
         </div>
         <client-only>

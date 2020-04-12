@@ -19,22 +19,24 @@
 </template>
 <script lang="ts">
 import Vue from 'vue'
+import { mapMutations, mapState } from 'vuex'
 import axios from '~/plugins/axios.ts'
 import AuthedView from '~/components/ui/AuthedView.vue'
 import RedirectTo from '~/components/ui/RedirectTo.vue'
 import NodeItem from '~/components/nodes/node.vue'
 export default Vue.extend({
     components: { AuthedView, RedirectTo, NodeItem },
-    data() {
-        return {
-            nodes: []
-        }
+    computed: {
+        ...mapState('nodes', ['nodes'])
     },
     async mounted() {
         const id = this.$route.params.id
         const req = await axios.get('/nodes/' + id)
-        this.nodes = req.data.items
+        this.list(req.data.items)
         this.$emit('input', req.data.node)
+    },
+    methods: {
+        ...mapMutations('nodes', ['list'])
     }
 })
 </script>
