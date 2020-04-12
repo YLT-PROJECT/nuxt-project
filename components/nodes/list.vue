@@ -33,7 +33,8 @@ export default Vue.extend({
     async mounted() {
         const id = this.$route.params.id
         const req = await axios.get('/nodes/' + id)
-        this.nodes = req.data
+        this.nodes = req.data.items
+        this.$emit('input', req.data.node)
     }
 })
 </script>
