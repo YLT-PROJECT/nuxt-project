@@ -27,7 +27,7 @@
             <div class="navbar-end">
                 <div class="navbar-item">
                     <template v-if="token && token.length > 0">
-                        <button class="button" @click="() => trashSession()">
+                        <button class="button" @click="() => closeSession()">
                             Cerrar la sesion
                         </button>
                     </template>
@@ -68,7 +68,11 @@ export default Vue.extend({
         }
     },
     methods: {
-        ...mapMutations(`auth`, [`trashSession`])
+        ...mapMutations(`auth`, [`trashSession`]),
+        closeSession() {
+            this.trashSession()
+            this.$router.push(`/`)
+        }
     }
 })
 </script>

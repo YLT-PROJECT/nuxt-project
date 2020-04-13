@@ -1,9 +1,3 @@
-# tareas
-* refactorizar models
-* integrar husky
-* Hacer switcher
-* meter clases de los bloques
-* redireccionar al cerrar sesion con el boton
 # nuxt-ylt
 
 > My laudable Nuxt.js project
