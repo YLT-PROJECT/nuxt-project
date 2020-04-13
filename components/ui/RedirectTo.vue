@@ -7,7 +7,7 @@ export default Vue.extend({
     props: {
         to: {
             type: String,
-            default: '',
+            default: ``,
             required: true
         },
         ms: {

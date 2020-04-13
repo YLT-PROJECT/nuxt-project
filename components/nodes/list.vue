@@ -27,16 +27,16 @@ import NodeItem from '~/components/nodes/node.vue'
 export default Vue.extend({
     components: { AuthedView, RedirectTo, NodeItem },
     computed: {
-        ...mapState('nodes', ['nodes'])
+        ...mapState(`nodes`, [`nodes`])
     },
     async mounted() {
-        const id = this.$route.params.id
-        const req = await axios.get('/nodes/' + id)
+        const { id } = this.$route.params
+        const req = await axios.get(`/nodes/` + id)
         this.list(req.data.items)
-        this.$emit('input', req.data.node)
+        this.$emit(`input`, req.data.node)
     },
     methods: {
-        ...mapMutations('nodes', ['list'])
+        ...mapMutations(`nodes`, [`list`])
     }
 })
 </script>

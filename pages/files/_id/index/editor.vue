@@ -11,6 +11,33 @@
                     />
                 </div>
             </div>
+            <template v-if="!editing">
+                <h3 class="is-size-5">Tipo de bloque</h3>
+                <div class="field">
+                    <div class="control">
+                        <label class="input-radio">
+                            <input
+                                id="typenode"
+                                v-model="data.type"
+                                type="radio"
+                                name="typenode"
+                                value="folder"
+                            />
+                            <span>Carpeta</span>
+                        </label>
+                        <label class="input-radio">
+                            <input
+                                id="typenode"
+                                v-model="data.type"
+                                type="radio"
+                                name="typenode"
+                                value="document"
+                            />
+                            <span>Documento</span>
+                        </label>
+                    </div>
+                </div>
+            </template>
             <div class="actions">
                 <template v-if="editing">
                     <div class="field">
@@ -62,7 +89,8 @@ export default Vue.extend({
     data() {
         return {
             data: {
-                title: ''
+                title: ``,
+                type: `folder`
             },
             nodeEditing: {},
             editing: false
@@ -70,40 +98,44 @@ export default Vue.extend({
     },
     computed: {
         nodeRoute() {
+            console.log(ssdsd)
             return `/files/` + this.$route.params.id
         },
         texts() {
-            const editing = (this as any).editing
+            const { editing } = this as any
             return {
-                title: editing ? 'Actualizar nodo' : 'Añadir nodo',
-                addDoc: editing ? 'Actualizar documento' : 'Añadir documento',
-                addFolder: editing ? 'Actualizar carpeta' : 'Añadir carpeta'
+                title: editing ? `Actualizar nodo` : `Añadir nodo`,
+                addDoc: editing ? `Actualizar documento` : `Añadir documento`,
+                addFolder: editing ? `Actualizar carpeta` : `Añadir carpeta`
             }
         }
     },
     mounted() {
-        const nodeId = this.$route.query.nodeId
+        const { nodeId } = this.$route.query
         const filter = (node: any) => node._id === nodeId
 
         if (nodeId) {
             this.editing = true
-            this.nodeEditing = this.$store.state.nodes.nodes.filter(filter)[0]
+            this.nodeEditing = this.$store.state.nodes.nodes
+                .filter(filter)
+                .pop()
             this.data.title = (this.nodeEditing as any).title
+            this.data.type = (this.nodeEditing as any).type
         }
     },
     methods: {
-        ...mapMutations('nodes', ['addNode', 'updateNode']),
+        ...mapMutations(`nodes`, [`addNode`, `updateNode`]),
         addDocument() {
-            this.saveNode('document')
+            this.saveNode()
         },
         addFolder() {
-            this.saveNode('folder')
+            this.saveNode()
         },
-        async saveNode(typeNode: string) {
-            const id = this.$route.params.id
-            const req = await axios.post('/nodes', {
+        async saveNode() {
+            const { id } = this.$route.params
+            const req = await axios.post(`/nodes`, {
                 title: this.data.title,
-                type: typeNode,
+                type: this.data.type,
                 child: id
             })
             this.addNode(req.data)
@@ -111,7 +143,7 @@ export default Vue.extend({
         },
         async updateNodeHttp() {
             const nodeIdEditing = (this.nodeEditing as any)._id
-            const req = await axios.put('/nodes/' + nodeIdEditing, {
+            const req = await axios.put(`/nodes/` + nodeIdEditing, {
                 title: this.data.title
             })
             this.updateNode({
@@ -128,5 +160,18 @@ export default Vue.extend({
 .actions {
     display: flex;
     justify-content: space-between;
+}
+label.input-radio {
+    font-size: 1.3em;
+    cursor: pointer;
+}
+label.input-radio > input {
+    display: none;
+}
+label.input-radio > input:checked + span {
+    padding: 0.2em;
+    color: white;
+    background-color: steelblue;
+    font-weight: bold;
 }
 </style>

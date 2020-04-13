@@ -70,13 +70,13 @@ export default Vue.extend({
     data() {
         return {
             data: {
-                email: '',
-                password: '',
-                name: '',
-                surname: ''
+                email: ``,
+                password: ``,
+                name: ``,
+                surname: ``
             },
             status: -1,
-            message: ''
+            message: ``
         }
     },
     methods: {
@@ -84,14 +84,14 @@ export default Vue.extend({
         async register() {
             try {
                 const { email, password, name, surname } = this.data
-                const req = await instanceAxios.post('/auth/register', {
+                const req = await instanceAxios.post(`/auth/register`, {
                     email,
                     password,
                     name,
                     surname
                 })
                 this.status = req.status
-                this.message = 'Te registraste correctamente'
+                this.message = `Te registraste correctamente`
             } catch (error) {
                 this.status = error.response.status
                 this.message = error.response.data.message

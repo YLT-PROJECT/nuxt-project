@@ -17,7 +17,7 @@ import { mapState } from 'vuex'
 
 export default Vue.extend({
     computed: {
-        ...mapState('auth', ['token'])
+        ...mapState(`auth`, [`token`])
     }
 })
 </script>

@@ -16,5 +16,13 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
+    "no-undef": "error",
+    "quotes": ["error", "backtick"],
+    "no-console": ["error"],
+    "semi": ["error", "never"],
+    "indent": ["error", 4],
+    "prefer-destructuring": ["error", {"object": true, "array": true}],
+    "no-undefined": "error",
+    "no-unused-vars": "error"
   }
 }

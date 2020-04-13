@@ -19,7 +19,7 @@ export default Vue.extend({
     props: {
         title: {
             type: String,
-            default: 'Título del modal'
+            default: `Título del modal`
         }
     }
 })

@@ -39,13 +39,13 @@ export default Vue.extend({
     },
     computed: {
         iconClass() {
-            return (this.node as any).type === 'folder'
-                ? 'fas fa-folder'
-                : 'fas fa-file'
+            return (this.node as any).type === `folder`
+                ? `fas fa-folder`
+                : `fas fa-file`
         },
         linkTo() {
             const node = this.node as any
-            return node.type === 'folder'
+            return node.type === `folder`
                 ? `/files/${node._id}`
                 : `/document/${node._id}/edit`
         }

@@ -52,7 +52,7 @@ export default Vue.extend({
         }
     },
     computed: {
-        ...mapState('auth', ['token']),
+        ...mapState(`auth`, [`token`]),
         classesNavbarMenu(): any {
             return {
                 'navbar-menu': true,
@@ -68,7 +68,7 @@ export default Vue.extend({
         }
     },
     methods: {
-        ...mapMutations('auth', ['trashSession'])
+        ...mapMutations(`auth`, [`trashSession`])
     }
 })
 </script>

@@ -13,7 +13,7 @@ export default Vue.extend({
             type: Boolean
         },
         message: {
-            default: '',
+            default: ``,
             type: String
         }
     }

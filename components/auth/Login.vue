@@ -64,28 +64,28 @@ export default Vue.extend({
     data() {
         return {
             data: {
-                email: '',
-                password: ''
+                email: ``,
+                password: ``
             },
             status: -1,
-            message: ''
+            message: ``
         }
     },
     computed: {
-        ...mapState('auth', ['token'])
+        ...mapState(`auth`, [`token`])
     },
     methods: {
-        ...mapMutations('auth', ['commitSession']),
+        ...mapMutations(`auth`, [`commitSession`]),
         async login() {
             try {
                 const { email, password } = this.data
-                const req = await instanceAxios.post('/auth/login', {
+                const req = await instanceAxios.post(`/auth/login`, {
                     username: email,
                     password
                 })
                 setToken(req.data.token)
                 this.status = req.status
-                this.message = 'Accediste correctamente'
+                this.message = `Accediste correctamente`
                 this.commitSession(req.data)
             } catch (error) {
                 this.status = error.response.status

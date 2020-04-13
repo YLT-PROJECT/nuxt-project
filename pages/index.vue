@@ -32,7 +32,7 @@ export default Vue.extend({
     components: { LoginForm, RegisterForm },
     data() {
         return {
-            tabActive: 'login'
+            tabActive: `login`
         }
     },
     methods: {
