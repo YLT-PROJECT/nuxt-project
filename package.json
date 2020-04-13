@@ -11,10 +11,6 @@
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --fix --ignore-path .gitignore ."
   },
-  "lint-staged": {
-    "*.{js,vue}": "npm run lint",
-    "*.{css,vue}": "stylelint"
-  },
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint"

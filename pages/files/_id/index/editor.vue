@@ -98,7 +98,7 @@ export default Vue.extend({
     },
     computed: {
         nodeRoute() {
-            console.log(ssdsd)
+            console.log(ssdssdsdsd)
             return `/files/` + this.$route.params.id
         },
         texts() {
