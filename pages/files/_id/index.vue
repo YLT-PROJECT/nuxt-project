@@ -1,7 +1,15 @@
 <template>
     <div>
         <div v-if="node" class="toolbar">
-            <h2 class="is-size-4">{{ node.title }}</h2>
+            <div style="display: flex;">
+                <nuxt-link
+                    v-if="$route.params.id !== 'root'"
+                    :to="`/files/${node.child}`"
+                >
+                    <i class="fas fa-arrow-left"></i>
+                </nuxt-link>
+                <h2 class="is-size-6">{{ node.title }}</h2>
+            </div>
             <div class="buttons">
                 <nuxt-link :to="`/files/${$route.params.id}/editor`">
                     <div class="icon is-medium ">

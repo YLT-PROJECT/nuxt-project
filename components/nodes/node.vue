@@ -7,7 +7,9 @@
                 </span>
             </div>
             <h2 class="is-size-5 node-title">
-                {{ node.title }}
+                <nuxt-link :to="linkTo">
+                    {{ node.title }}
+                </nuxt-link>
             </h2>
         </div>
         <footer class="card-footer">
@@ -40,6 +42,12 @@ export default Vue.extend({
             return (this.node as any).type === 'folder'
                 ? 'fas fa-folder'
                 : 'fas fa-file'
+        },
+        linkTo() {
+            const node = this.node as any
+            return node.type === 'folder'
+                ? `/files/${node._id}`
+                : `/document/${node._id}/edit`
         }
     }
 })
